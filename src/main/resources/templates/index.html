@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ホーム画面</title>
+</head>
+<body>
+	<h1>ホーム画面</h1>
+	
+	<form method="post" th:action="${taskForm.newTask}? @{/taks/insert} : @{/task/update/}" th:object="${taskForm}">
+		<label>タイトル</label>
+		<input type="text" name="title" th:value="*{title}"><br>
+		
+		<label>内容</label>
+		<input type="text" name="task" th:value="*{task}"><br>
+		
+		<input type="submit" value="タスク登録"> 
+	</form>
+	
+	<div th:if="${taskForm.newTask}">
+		<tr th:each="task : ${tasks}">
+			<td th:text="${task.title}"></td>
+			<td th:text="${task.task}"></td>
+		</tr>
+		
+	</div>
+</body>
+</html>
