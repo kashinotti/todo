@@ -7,7 +7,7 @@
 <body>
 	<h1>ホーム画面</h1>
 	
-	<form method="post" th:action="${taskForm.newTask}? @{/taks/insert} : @{/task/update/}" th:object="${taskForm}">
+	<form method="post" th:action="${taskForm.newTask}? @{/task/insert} : @{/task/update/}" th:object="${taskForm}">
 		<label>タイトル</label>
 		<input type="text" name="title" th:value="*{title}"><br>
 		

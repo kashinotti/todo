@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.demo.entity.Task;
@@ -28,4 +30,37 @@ public class TaskController {
 		model.addAttribute("tasks", tasks);
 		return "index";
 	}
+	
+	@PostMapping("/insert")
+	public String insert(@ModelAttribute TaskForm taskForm, Model model) {
+		
+		Task task = makeTask(taskForm, 0);
+		
+		taskService.insert(task);
+		return "redirect:/task";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//フォーム値をTaskに入れ直すメソッド
+	private Task makeTask(TaskForm taskForm, int taskId) {
+		Task task = new Task();
+		
+		if(taskId != 0) {
+			task.setId(taskId);
+		}
+		//ユーザー機能を実装できるまで1で対応
+		//実装後はゲッターでIDを取得しセット
+		task.setUser_id(1);
+		task.setTitle(taskForm.getTitle());
+		task.setTask(taskForm.getTask());
+		return task;
+	}
+	
 }
