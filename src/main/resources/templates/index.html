@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>ホーム画面</title>
@@ -21,6 +21,12 @@
 		<tr th:each="task : ${tasks}">
 			<td th:text="${task.title}"></td>
 			<td th:text="${task.task}"></td>
+			<td>
+				<form method="POST" th:action="@{/task/delete}">
+					<input type="hidden" name="taskId" th:value="${task.id}">
+					<input type="submit" value="削除"> 
+				</form>
+			</td>
 		</tr>
 		
 	</div>

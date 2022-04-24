@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.entity.Task;
 import com.example.demo.service.TaskService;
@@ -40,8 +41,13 @@ public class TaskController {
 		return "redirect:/task";
 	}
 	
-	
-	
+	@PostMapping("/delete")
+	public String delete(@RequestParam("taskId") int id) {
+		
+		taskService.deleteTaskById(id);
+		
+		return "redirect:/task";
+	}
 	
 	
 	
