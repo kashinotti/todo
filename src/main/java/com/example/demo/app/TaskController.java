@@ -1,12 +1,14 @@
 package com.example.demo.app;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,7 +51,32 @@ public class TaskController {
 		return "redirect:/task";
 	}
 	
+	@GetMapping("/{id}")
+	public String showUpdate(TaskForm taskForm, @PathVariable int id, Model model) {
+		//Taskの取得
+		Optional<Task> taskOpt = taskService.getTask(id);
+		//TaskFormへの入れ直し
+		Optional<TaskForm> taskFormOpt = taskOpt.map(t -> makeTaskForm(t));
+		
+		if(taskFormOpt.isPresent()) {
+			taskForm = taskFormOpt.get();
+		}
+		
+		model.addAttribute("taskForm", taskForm);
+		List<Task> tasks = taskService.findAllTask();
+		model.addAttribute("tasks", tasks);
+		//タスク更新の時にタスクのidが必要なためセット
+		model.addAttribute("taskId", id);
+		
+		return "index";
+	}
 	
+	@PostMapping("/update")
+	public String update(@ModelAttribute TaskForm taskForm, @RequestParam("taskId") int taskId) {
+		Task task = makeTask(taskForm, taskId);
+		taskService.update(task);
+		return "redirect:/task";
+	}
 	
 	
 	
@@ -69,4 +96,12 @@ public class TaskController {
 		return task;
 	}
 	
+	private TaskForm makeTaskForm(Task task) {
+		TaskForm taskForm = new TaskForm();
+		taskForm.setTitle(task.getTitle());
+		taskForm.setTask(task.getTask());
+		taskForm.setNewTask(false);
+		
+		return taskForm;
+	}
 }

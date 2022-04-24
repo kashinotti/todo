@@ -7,13 +7,13 @@
 <body>
 	<h1>ホーム画面</h1>
 	
-	<form method="post" th:action="${taskForm.newTask}? @{/task/insert} : @{/task/update/}" th:object="${taskForm}">
+	<form method="post" th:action="${taskForm.newTask}? @{/task/insert} : @{/task/update}" th:object="${taskForm}">
 		<label>タイトル</label>
 		<input type="text" name="title" th:value="*{title}"><br>
 		
 		<label>内容</label>
 		<input type="text" name="task" th:value="*{task}"><br>
-		
+		<input th:if="${taskId}" type="hidden" name="taskId" th:value="${taskId}">
 		<input type="submit" value="タスク登録"> 
 	</form>
 	
@@ -21,6 +21,7 @@
 		<tr th:each="task : ${tasks}">
 			<td th:text="${task.title}"></td>
 			<td th:text="${task.task}"></td>
+			<td><a type="button" th:href="@{/task/{id}(id=${task.id})}">編集</a></td>
 			<td>
 				<form method="POST" th:action="@{/task/delete}">
 					<input type="hidden" name="taskId" th:value="${task.id}">
