@@ -2,33 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script type="text/javascript" th:src="@{/js/create.js}"></script>
+<script type="text/javascript" th:src="@{/js/delete.js}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>ホーム画面</title>
 </head>
 <body>
+	<!-- SpringへのPathを用意する(非同期通信用) -->
+	<input type="hidden" id="ajax_url" th:value="@{/task/insert}">
 	<h1>ホーム画面</h1>
 	
-	<form method="post" th:action="${taskForm.newTask}? @{/task/insert} : @{/task/update/}" th:object="${taskForm}">
+	<form method="post" id="task_form" th:action="${taskForm.newTask}? @{/task/insert} : @{/task/update}" th:object="${taskForm}">
 		<label>タイトル</label>
-		<input type="text" name="title" th:value="*{title}"><br>
+		<input type="text" id="task-title" name="title" th:value="*{title}"><br>
 		
 		<label>内容</label>
-		<input type="text" name="task" th:value="*{task}"><br>
-		
-		<input type="submit" value="タスク登録"> 
+		<input type="text" id="task-content" name="task" th:value="*{task}"><br>
+		<input th:if="${taskId}" type="hidden" name="taskId" th:value="${taskId}">
+		<input type="submit" id="sub_button" value="タスク登録"> 
 	</form>
 	
-	<div th:if="${taskForm.newTask}">
-		<tr th:each="task : ${tasks}">
-			<td th:text="${task.title}"></td>
-			<td th:text="${task.task}"></td>
-			<td>
-				<form method="POST" th:action="@{/task/delete}">
-					<input type="hidden" name="taskId" th:value="${task.id}">
-					<input type="submit" value="削除"> 
-				</form>
-			</td>
-		</tr>
-		
+	<div id="task_index" th:if="${taskForm.newTask}">
+		<table>
+			<tbody>
+				<tr th:id="task_list + ${task.id}" th:data-index="${task.id}" th:each="task : ${tasks}">
+					<td th:text="${task.title}"></td>
+					<td th:text="${task.task}"></td>
+					<td><a type="button" th:href="@{/task/{id}(id=${task.id})}">編集</a></td>
+					<td>
+						<form method="POST" th:action="@{/task/delete}">
+							<input class="get_id" type="hidden" name="taskId" th:value="${task.id}">
+							<input id="delete_task" th:data-index="${task.id}" type="submit" value="削除"> 
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>	
 	</div>
 </body>
 </html>
