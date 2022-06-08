@@ -47,11 +47,11 @@ public class TaskController {
 	}
 	
 	@PostMapping("/delete")
-	public String delete(@RequestParam("taskId") int id) {
-		
+	@ResponseBody
+	public void delete(@ModelAttribute TaskForm taskForm) {
+		//int idだとJQueryのpostメソッドからの値を受け取れないので、taskFormで受け取りidをセット
+		int id = taskForm.getId();
 		taskService.deleteTaskById(id);
-		
-		return "redirect:/task";
 	}
 	
 	@GetMapping("/{id}")

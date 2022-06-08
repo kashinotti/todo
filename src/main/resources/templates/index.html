@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript" th:src="@{/js/create.js}"></script>
+<script type="text/javascript" th:src="@{/js/delete.js}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>ホーム画面</title>
 </head>
@@ -23,17 +24,21 @@
 	</form>
 	
 	<div id="task_index" th:if="${taskForm.newTask}">
-		<tr id="task_list" th:each="task : ${tasks}">
-			<td th:text="${task.title}"></td>
-			<td th:text="${task.task}"></td>
-			<td><a type="button" th:href="@{/task/{id}(id=${task.id})}">編集</a></td>
-			<td>
-				<form method="POST" th:action="@{/task/delete}">
-					<input type="hidden" name="taskId" th:value="${task.id}">
-					<input type="submit" value="削除"> 
-				</form>
-			</td>
-		</tr>		
+		<table>
+			<tbody>
+				<tr th:id="task_list + ${task.id}" th:data-index="${task.id}" th:each="task : ${tasks}">
+					<td th:text="${task.title}"></td>
+					<td th:text="${task.task}"></td>
+					<td><a type="button" th:href="@{/task/{id}(id=${task.id})}">編集</a></td>
+					<td>
+						<form method="POST" th:action="@{/task/delete}">
+							<input class="get_id" type="hidden" name="taskId" th:value="${task.id}">
+							<input id="delete_task" th:data-index="${task.id}" type="submit" value="削除"> 
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>	
 	</div>
 </body>
 </html>
