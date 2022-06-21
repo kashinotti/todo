@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.entity.Task;
@@ -37,13 +36,13 @@ public class TaskController {
 	
 	@PostMapping("/insert")
 	@ResponseBody
-	public Task insert(@ModelAttribute TaskForm taskForm, Model model) {
+	public void insert(@ModelAttribute TaskForm taskForm, Model model) {
 		
 		Task task = makeTask(taskForm, 0);
 		
 		taskService.insert(task);
 //		return "redirect:/task";
-		return task;
+		//return task;
 	}
 	
 	@PostMapping("/delete")
@@ -75,10 +74,11 @@ public class TaskController {
 	}
 	
 	@PostMapping("/update")
-	public String update(@ModelAttribute TaskForm taskForm, @RequestParam("taskId") int taskId) {
+	@ResponseBody
+	public void update(@ModelAttribute TaskForm taskForm) {
+		int taskId = taskForm.getId();
 		Task task = makeTask(taskForm, taskId);
 		taskService.update(task);
-		return "redirect:/task";
 	}
 	
 	
