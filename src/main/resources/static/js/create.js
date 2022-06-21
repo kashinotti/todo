@@ -7,7 +7,8 @@ $(document).on("click", '#sub_button', function(e) {
 	$.post("/task/insert", params).done(function() {
 		//Ajaxで通信を行おうとすると画面遷移が発生しないのでthymeleafのレンダリングができないように見受けられる。
 		//そのためタスクをデータベースに登録後タスクリストの部分だけを再読み込みする。
-		$('#task_index').load('task #task_index');
+		//urlをlocalhost:8080/task/に合わせるためloadの引数に半角スペースをいれる
+		$('#task_index').load(' #task_index');
 	});
 });
 

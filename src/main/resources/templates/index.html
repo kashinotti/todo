@@ -2,24 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/index.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <script type="text/javascript" th:src="@{/js/create.js}"></script>
 <script type="text/javascript" th:src="@{/js/delete.js}"></script>
+<script type="text/javascript" th:src="@{/js/update.js}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>ホーム画面</title>
 </head>
 <body>
 	<!-- SpringへのPathを用意する(非同期通信用) -->
-	<input type="hidden" id="ajax_url" th:value="@{/task/insert}">
+<!-- 	<input type="hidden" id="ajax_url" th:value="@{/task/insert}"> -->
 	<h1>ホーム画面</h1>
 	
-	<form method="post" id="task_form" th:action="${taskForm.newTask}? @{/task/insert} : @{/task/update}" th:object="${taskForm}">
+	<form method="post" id="task_form" th:action="@{/task/insert}" th:object="${taskForm}">
 		<label>タイトル</label>
-		<input type="text" id="task-title" name="title" th:value="*{title}"><br>
+		<input type="text" id="task-title" name="title"><br>
 		
 		<label>内容</label>
-		<input type="text" id="task-content" name="task" th:value="*{task}"><br>
-		<input th:if="${taskId}" type="hidden" name="taskId" th:value="${taskId}">
+		<input type="text" id="task-content" name="task"><br>
+		<!-- <input th:if="${taskId}" type="hidden" name="taskId" th:value="${taskId}"> -->
 		<input type="submit" id="sub_button" value="タスク登録"> 
 	</form>
 	
@@ -27,9 +29,9 @@
 		<table>
 			<tbody>
 				<tr th:id="task_list + ${task.id}" th:data-index="${task.id}" th:each="task : ${tasks}">
-					<td th:text="${task.title}"></td>
-					<td th:text="${task.task}"></td>
-					<td><a type="button" th:href="@{/task/{id}(id=${task.id})}">編集</a></td>
+					<td class="title" th:text="${task.title}"></td>
+					<td class="content "th:text="${task.task}"></td>
+					<td><a type="button" id="update_task" th:data-index="${task.id}" th:href="@{/task/{id}(id=${task.id})}">編集</a></td>
 					<td>
 						<form method="POST" th:action="@{/task/delete}">
 							<input class="get_id" type="hidden" name="taskId" th:value="${task.id}">
@@ -39,6 +41,21 @@
 				</tr>
 			</tbody>
 		</table>	
+	</div>
+	<!-- モーダルウィンドウで表示する部分 -->
+	<div id="update-modal">
+		<div class="modal-background"></div>
+		<div class="modal-content">
+			<form id="modal-form" method="post" th:action="@{/task/update}" th:object="${taskForm}">
+				<label>タイトル</label>
+				<input type="text" id="update-title" name="title"><br>
+				<label>内容</label>
+				<input type="text" id="update-task" name="task">
+				<input type="hidden" id="update-id" name="id">
+				<input type="button" id="update-submit" value="更新">
+				<button type="button" id="back-button">戻る</button>
+			</form>
+		</div>
 	</div>
 </body>
 </html>
