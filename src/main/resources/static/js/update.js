@@ -72,7 +72,7 @@ $(document).on('click', '#update-submit', function() {
 	//フォームに入力した値を配列で格納する
 	let param = $formDate.serializeArray();
 	//$.post()で取得した値をコントローラーに渡す
-	$.post('/task/update', param).done(function() {
+	$.post('/update', param).done(function() {
 		$('#update-modal').fadeOut();
 		$('#task_index').load(' #task_index');
 	});

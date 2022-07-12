@@ -4,7 +4,7 @@ $(document).on('click', '#delete_task', function(e) {
 	let taskId = e.currentTarget.dataset['index'];
 	//postメソッドでコントローラーに値を送るためオブジェクト作成
 	let setId = {id:taskId};
-	$.post('/task/delete', setId).done(function() {
+	$.post('/delete', setId).done(function() {
 		$(`#task_list${taskId}`).remove();
 	});
 });
