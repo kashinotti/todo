@@ -17,7 +17,7 @@ import com.example.demo.entity.Task;
 import com.example.demo.service.TaskService;
 
 @Controller
-@RequestMapping("/task")
+@RequestMapping("/")
 public class TaskController {
 	
 	@Autowired
