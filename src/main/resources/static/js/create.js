@@ -9,6 +9,9 @@ $(document).on("click", '#sub_button', function(e) {
 		//そのためタスクをデータベースに登録後タスクリストの部分だけを再読み込みする。
 		//urlをlocalhost:8080/task/に合わせるためloadの引数に半角スペースをいれる
 		$('#task_index').load(' #task_index');
+		
+		$('#task-title').val("");
+		$('#task-content').val("");
 	});
 });
 

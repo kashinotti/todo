@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	
+	<!-- 新規ユーザ登録フォーム。最終的に消す -->
+	<!-- password→aaaaa -->
+	<div>
+		<form method="post" th:action="@{/user/create}" th:object="${user}">
+			<label>ユーザー名</label>
+			<input type="text" name="username">
+			<input type="text" name="password">
+			<input type="hidden" name="role" value="USER">
+			<input type="submit" value="新規登録">
+		</form>
+	</div>
+</body>
+</html>
