@@ -29,14 +29,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	protected void configure(HttpSecurity http) throws Exception{
 		http.authorizeRequests()
-			.antMatchers("/login", "/user/signup", "user/create")
+			.antMatchers("/login", "/user/signup", "/user/create")
 			.permitAll()
 			.anyRequest().authenticated();
 		
 		http.formLogin()
-		.loginProcessingUrl("/")
-		//.loginPage("/login") //ログイン画面の設定
-		//.failureUrl("/login") //ログイン失敗時に遷移する画面の設定
+		.loginProcessingUrl("/login")
+		.loginPage("/login") //ログイン画面の設定
+		.permitAll()
+		.failureUrl("/login") //ログイン失敗時に遷移する画面の設定
 		.usernameParameter("username")
         .passwordParameter("password")
         .defaultSuccessUrl("/", true);

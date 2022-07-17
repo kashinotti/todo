@@ -13,6 +13,7 @@
 <body>
 	<!-- SpringへのPathを用意する(非同期通信用) -->
 <!-- 	<input type="hidden" id="ajax_url" th:value="@{/task/insert}"> -->
+	<p th:text="${loginUserName} + でログインしています。"></p>
 	<h1>ホーム画面</h1>
 	
 	<form method="post" id="task_form" th:action="@{/insert}" th:object="${taskForm}">
@@ -27,7 +28,7 @@
 	<div id="task_index" th:if="${taskForm.newTask}">
 		<table>
 			<tbody>
-				<tr th:id="task_list + ${task.id}" th:data-index="${task.id}" th:each="task : ${tasks}">
+				<tr th:id="task_list + ${task.id}" th:data-index="${task.id}" th:each="task : ${tasks}" th:if="${task.user_id == loginUserId}">
 					<td class="title" th:text="${task.title}"></td>
 					<td class="content "th:text="${task.task}"></td>
 					<td><a type="button" id="update_task" th:data-index="${task.id}" th:href="@{/task/{id}(id=${task.id})}">編集</a></td>

@@ -38,4 +38,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return userDetails;
 	}
 	
+	public int getId(String username) {
+		var user = userService.findByUsername(username);
+		int id = user.getId();
+		return id;
+	}
+	
 }

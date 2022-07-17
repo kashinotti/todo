@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.entity.Task;
 import com.example.demo.service.TaskService;
+import com.example.demo.service.UserDetailsServiceImpl;
 
 @Controller
 @RequestMapping("/")
@@ -23,22 +26,30 @@ public class TaskController {
 	@Autowired
 	TaskService taskService;
 	
+	@Autowired
+	UserDetailsServiceImpl userDetailsService;
+	
 	@GetMapping
-	public String index(TaskForm taskForm, Model model) {
+	public String index(TaskForm taskForm, Model model, @AuthenticationPrincipal UserDetails loginUser) {
 		//新規登録か更新か判断するためにセット(新規登録と判断)
 		taskForm.setNewTask(true);
+		//ログインユーザーの情報をセット
+		String loginUserName = loginUser.getUsername();
+		int loginUserId = userDetailsService.getId(loginUserName);
 		
 		//taskのリストを取得してモデルにセット
 		List<Task> tasks = taskService.findAllTask();
 		model.addAttribute("tasks", tasks);
+		model.addAttribute("loginUserName", loginUserName);
+		model.addAttribute("loginUserId", loginUserId);
 		return "index";
 	}
 	
 	@PostMapping("/insert")
 	@ResponseBody
-	public void insert(@ModelAttribute TaskForm taskForm, Model model) {
+	public void insert(@ModelAttribute TaskForm taskForm, Model model, @AuthenticationPrincipal UserDetails loginUser) {
 		
-		Task task = makeTask(taskForm, 0);
+		Task task = makeTask(taskForm, 0, loginUser.getUsername());
 		
 		taskService.insert(task);
 //		return "redirect:/task";
@@ -75,9 +86,9 @@ public class TaskController {
 	
 	@PostMapping("/update")
 	@ResponseBody
-	public void update(@ModelAttribute TaskForm taskForm) {
+	public void update(@ModelAttribute TaskForm taskForm, @AuthenticationPrincipal UserDetails loginUser) {
 		int taskId = taskForm.getId();
-		Task task = makeTask(taskForm, taskId);
+		Task task = makeTask(taskForm, taskId, loginUser.getUsername());
 		taskService.update(task);
 	}
 	
@@ -85,7 +96,7 @@ public class TaskController {
 	
 	
 	//フォーム値をTaskに入れ直すメソッド
-	private Task makeTask(TaskForm taskForm, int taskId) {
+	private Task makeTask(TaskForm taskForm, int taskId, String username) {
 		Task task = new Task();
 		
 		if(taskId != 0) {
@@ -93,7 +104,8 @@ public class TaskController {
 		}
 		//ユーザー機能を実装できるまで1で対応
 		//実装後はゲッターでIDを取得しセット
-		task.setUser_id(1);
+		int id = userDetailsService.getId(username);
+		task.setUser_id(id);
 		task.setTitle(taskForm.getTitle());
 		task.setTask(taskForm.getTask());
 		return task;
