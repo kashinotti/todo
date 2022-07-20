@@ -10,4 +10,7 @@ import com.example.demo.entity.User;
 public interface UserRepository extends JpaRepository<User, Integer>{
 	@Query("select t from User t WHERE t.username = ?1")
 	public User findByUsername(String username);
+	
+	@Query("select t from User t WHERE t.id = ?1")
+	public User findById(int id);
 }

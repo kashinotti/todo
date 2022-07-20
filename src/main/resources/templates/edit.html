@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ユーザー情報変更</title>
+</head>
+<body>
+	<h1 th:text="${loginUser.username} + の更新"></h1>
+	<div>
+		<form method="post" th:action="@{/user/update}" th:object="${loginUser}">
+			<label>ユーザー名</label>
+			<input type="text" name="username" th:value="${loginUser.username}">
+			<label>パスワード</label>
+			<input type="text" name="password">
+			<input type="hidden" name="id" th:value="${loginUser.id}">
+			<input type="hidden" name="role" value="USER">
+			<input type="submit" value="更新">
+		</form>
+		<form method="get" th:action="@{/}">
+			<input type="submit" value="戻る">
+		</form>
+	</div>
+</body>
+</html>
