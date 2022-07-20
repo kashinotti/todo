@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.entity.Task;
+import com.example.demo.entity.User;
 import com.example.demo.service.TaskService;
 import com.example.demo.service.UserDetailsServiceImpl;
+import com.example.demo.service.UserService;
 
 @Controller
 @RequestMapping("/")
@@ -27,21 +29,26 @@ public class TaskController {
 	TaskService taskService;
 	
 	@Autowired
+	UserService userService;
+	
+	@Autowired
 	UserDetailsServiceImpl userDetailsService;
 	
 	@GetMapping
-	public String index(TaskForm taskForm, Model model, @AuthenticationPrincipal UserDetails loginUser) {
+	public String index(TaskForm taskForm, Model model, @AuthenticationPrincipal UserDetails user) {
 		//新規登録か更新か判断するためにセット(新規登録と判断)
 		taskForm.setNewTask(true);
 		//ログインユーザーの情報をセット
-		String loginUserName = loginUser.getUsername();
-		int loginUserId = userDetailsService.getId(loginUserName);
-		
+//		String loginUserName = user.getUsername();
+//		int loginUserId = userDetailsService.getId(loginUserName);
+		User loginUser = userService.findByUsername(user.getUsername());
+		System.out.println(loginUser.getId());
 		//taskのリストを取得してモデルにセット
 		List<Task> tasks = taskService.findAllTask();
 		model.addAttribute("tasks", tasks);
-		model.addAttribute("loginUserName", loginUserName);
-		model.addAttribute("loginUserId", loginUserId);
+		model.addAttribute("loginUser", loginUser);
+//		model.addAttribute("loginUserName", loginUserName);
+//		model.addAttribute("loginUserId", loginUserId);
 		return "index";
 	}
 	

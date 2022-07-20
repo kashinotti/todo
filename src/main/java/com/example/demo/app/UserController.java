@@ -1,6 +1,10 @@
 package com.example.demo.app;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,4 +42,42 @@ public class UserController {
 		return "redirect:/login";
 	}
 	
+	@GetMapping("edit")
+	public String edit(Model model, @ModelAttribute User loginUser) {
+		User loginUserInfo = userService.findByUsername(loginUser.getUsername());
+		model.addAttribute("loginUser", loginUserInfo);
+		return "edit";
+	}
+	
+	@PostMapping("update")
+	//@ResponseBody
+	public String update(Model model, @ModelAttribute User loginUser) {
+		System.out.println(loginUser.getUsername());
+		System.out.println(loginUser.getPassword());
+		if(loginUser.getPassword() != "" ) {
+			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+			String encodePassword = passwordEncoder.encode(loginUser.getPassword());
+			loginUser.setPassword(encodePassword);
+			userService.save(loginUser);
+		} else {
+			User oldUser = userService.findById(loginUser.getId());
+			loginUser.setPassword(oldUser.getPassword());
+			userService.save(loginUser);
+		}
+		updateSecurity(loginUser);
+		return "redirect:/";
+	}
+	
+	//ユーザー情報変更後に認証情報とセッションで保持している値を変更するメソッド
+	private void updateSecurity(User user) {
+		//EntityのUserとクラス名がかぶるので完全修飾名で記載
+		UserDetails userDetails = org.springframework.security.core.userdetails.User.builder()
+				.username(user.getUsername())
+				.password(user.getPassword())
+				.roles(user.getRole())
+				.build();
+		//セッションの値をセット
+		SecurityContext context = SecurityContextHolder.getContext();
+		context.setAuthentication(new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(), userDetails.getAuthorities()));
+	}
 }
