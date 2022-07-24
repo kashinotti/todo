@@ -8,6 +8,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -56,6 +57,16 @@ public class TaskController {
 	@ResponseBody
 	public void insert(@ModelAttribute TaskForm taskForm, Model model, @AuthenticationPrincipal UserDetails loginUser) {
 		
+//		if(result.hasErrors()) {
+//			List<String> errorList = new ArrayList<String>();
+//			for(ObjectError error : result.getAllErrors()) {
+//				errorList.add(error.getDefaultMessage());
+//			}
+//			
+//			model.addAttribute("errorMessages", errorList);
+//			return "index";
+//		}
+		
 		Task task = makeTask(taskForm, 0, loginUser.getUsername());
 		
 		taskService.insert(task);
@@ -93,7 +104,7 @@ public class TaskController {
 	
 	@PostMapping("/update")
 	@ResponseBody
-	public void update(@ModelAttribute TaskForm taskForm, @AuthenticationPrincipal UserDetails loginUser) {
+	public void update(@ModelAttribute @Validated TaskForm taskForm, @AuthenticationPrincipal UserDetails loginUser) {
 		int taskId = taskForm.getId();
 		Task task = makeTask(taskForm, taskId, loginUser.getUsername());
 		taskService.update(task);

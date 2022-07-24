@@ -9,6 +9,11 @@
 	<!-- 新規ユーザ登録フォーム。最終的に消す -->
 	<!-- password→aaaaa -->
 	<div>
+		<ul th:if="${validationError}" th:each="error : ${validationError}">
+			<li th:text="${error}"></li>
+		</ul>
+	</div>
+	<div>
 		<form method="post" th:action="@{/user/create}" th:object="${user}">
 			<label>ユーザー名</label>
 			<input type="text" name="username">

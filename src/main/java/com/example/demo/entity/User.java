@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -25,9 +26,11 @@ public class User {
 	private int id;
 	
 	@Column
+	@NotBlank(message = "ユーザー名を入力してください")
 	private String username;
 	
 	@Column
+	@NotBlank(message = "パスワードを入力してください")
 	private String password;
 	
 	@Column

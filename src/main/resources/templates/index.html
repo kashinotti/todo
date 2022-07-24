@@ -3,12 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/index.css">
+<link rel="stylesheet" href="/css/userUpdate.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script> -->
 <script type="text/javascript" th:src="@{/js/create.js}"></script>
 <script type="text/javascript" th:src="@{/js/delete.js}"></script>
 <script type="text/javascript" th:src="@{/js/update.js}"></script>
 <script type="text/javascript" th:src="@{/js/userUpdate.js}"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.js"></script>
 <title>ホーム画面</title>
 </head>
 <body>
@@ -73,6 +76,16 @@
 	<div id="user-update-modal">
 		<div class="user-modal-background"></div>
 		<div class="user-modal-content">
+			<!-- <div>
+				<ul th:if="${validationError}" th:each="error : ${validationError}">
+					<li th:text="${error}"></li>
+				</ul>
+			</div> -->
+			<div id="user-validation">
+				<ul>
+					<li>ユーザー名の入力は必須です</li>
+				</ul>
+			</div>
 			<form id="user-modal-form" method="post" th:action="@{/user/update}" th:object="${loginUser}">
 				<label>ユーザー名</label>
 				<input type="text" id="update-username" name="username" th:value="${loginUser.username}"><br>
