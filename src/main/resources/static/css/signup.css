@@ -1,0 +1,87 @@
+.top-text h1{
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.signup-error {
+	text-align: center;
+	color: red;	
+}
+
+.signup-error ul {
+	list-style: none;
+}
+
+.signup-form-wrapper{
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.signup-submit {
+	margin: 20px 0 20px 0;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.backbutton {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.signup-submit input {
+	background: #4682B4;
+    border-radius: 3px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 220px;
+    padding: 7px 30px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+
+.signup-submit  button:before {
+    position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+.signup-submit button:hover {
+    background: #FFF;
+    color: black;
+}
+
+
+.backbutton input {
+	background: #C0C0C0;
+    border-radius: 3px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 220px;
+    padding: 8px 43px;
+    color: black;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+
+.backbutton input:before {
+    position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+.backbutton input:hover {
+    background: #FFF;
+    color: black;
+}
+

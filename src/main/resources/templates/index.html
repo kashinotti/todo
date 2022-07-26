@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="/css/index.css">
 <link rel="stylesheet" href="/css/userUpdate.css">
+<link rel="stylesheet" href="/css/common.css">
 <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 <!-- <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.2/dist/jquery.validate.js"></script> -->
 <script type="text/javascript" th:src="@{/js/create.js}"></script>
@@ -15,39 +16,53 @@
 <title>ホーム画面</title>
 </head>
 <body>
+
+	<div th:replace="common :: header"></div>
 	<!-- SpringへのPathを用意する(非同期通信用) -->
 	<!-- <input type="hidden" id="ajax_url" th:value="@{/task/insert}"> -->
 	<input type="hidden" id="loginUser-info1" th:value="${loginUser.username}">
 	<input type="hidden" id="loginUser-info2" th:value="${loginUser.id}">
 	
-	<p id="loginInfo" th:text="${loginUser.username} + でログインしています。"></p>
-	<div>
-		<button id="update-user">ユーザー情報変更</button>
+	<!-- <p id="loginInfo" th:text="${loginUser.username} + でログインしています。"></p> -->
+	<!-- <div> -->
+	<!-- 	<button id="update-user">ユーザー情報変更</button> -->
 		<!-- <form method="get" th:action="@{/user/edit}">
 			<input type="hidden" name="username" th:value="${loginUser.username}">
 			<input type="submit" value="登録情報変更">
 		</form> -->
+	<!-- </div> -->
+	<div class="top-text">
+		<h1 th:text="${loginUser.username} + のタスク"></h1>
 	</div>
-	<h1>ホーム画面</h1>
-	
-	<form method="post" id="task_form" th:action="@{/insert}" th:object="${taskForm}">
-		<label>タイトル</label>
-		<input type="text" id="task-title" name="title"><br>
-		
-		<label>内容</label>
-		<input type="text" id="task-content" name="task"><br>
-		<input type="submit" id="sub_button" value="タスク登録"> 
-	</form>
-	
+	<div class="new-task-form">
+		<form method="post" id="task_form" th:action="@{/insert}" th:object="${taskForm}">
+			<label class="new-title-label">タイトル:</label>
+			<input type="text" id="task-title" name="title">
+			
+			<label class="new-task-label">内容:</label>
+			<input type="text" id="task-content" name="task">
+			<input type="submit" id="sub_button" value="タスク登録"> 
+		</form>
+	</div>
 	<div id="task_index" th:if="${taskForm.newTask}">
 		<table>
 			<tbody>
+				<tr>
+					<th>タイトル</th>
+					<th>内容</th>
+					<th>編集</th>
+					<th>削除</th>
+				</tr>
 				<tr th:id="task_list + ${task.id}" th:data-index="${task.id}" th:each="task : ${tasks}" th:if="${task.user_id == loginUser.id}">
 					<td class="title" th:text="${task.title}"></td>
 					<td class="content "th:text="${task.task}"></td>
-					<td><a type="button" id="update_task" th:data-index="${task.id}" th:href="@{/task/{id}(id=${task.id})}">編集</a></td>
 					<td>
-						<form method="POST" th:action="@{/delete}">
+						<a type="button" id="update_task" th:data-index="${task.id}" th:href="@{/task/{id}(id=${task.id})}">
+							<button type="button">編集</button>
+						</a>
+					</td>
+					<td>
+						<form method="POST" id="delete-task" th:action="@{/delete}">
 							<input class="get_id" type="hidden" name="taskId" th:value="${task.id}">
 							<input id="delete_task" th:data-index="${task.id}" type="submit" value="削除"> 
 						</form>
@@ -60,9 +75,12 @@
 	<div id="update-modal">
 		<div class="modal-background"></div>
 		<div class="modal-content">
+			<div>
+				<h3>タスク編集</h3>
+			</div>
 			<form id="modal-form" method="post" th:action="@{/update}" th:object="${taskForm}">
 				<label>タイトル</label>
-				<input type="text" id="update-title" name="title"><br>
+				<input type="text" id="update-title" name="title">
 				<label>内容</label>
 				<input type="text" id="update-task" name="task">
 				<input type="hidden" id="update-id" name="id">
@@ -81,6 +99,9 @@
 					<li th:text="${error}"></li>
 				</ul>
 			</div> -->
+			<div>
+				<h3>登録情報変更</h3>
+			</div>
 			<div id="user-validation">
 				<ul>
 					<li>ユーザー名の入力は必須です</li>
@@ -88,7 +109,7 @@
 			</div>
 			<form id="user-modal-form" method="post" th:action="@{/user/update}" th:object="${loginUser}">
 				<label>ユーザー名</label>
-				<input type="text" id="update-username" name="username" th:value="${loginUser.username}"><br>
+				<input type="text" id="update-username" name="username" th:value="${loginUser.username}">
 				<label>パスワード</label>
 				<input type="text" id="update-password" name="password">
 				<input type="hidden" id="update-id" name="id" th:value="${loginUser.id}">
@@ -99,8 +120,10 @@
 		</div>
 	</div>
 	
-	<form method="post" th:action="@{/logout}">
+	<!-- <form method="post" th:action="@{/logout}">
 		<input type="submit" value="ログアウト">
-	</form>
+	</form> -->
+	
+	<div th:replace="common :: footer"></div>
 </body>
 </html>

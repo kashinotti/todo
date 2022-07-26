@@ -33,9 +33,11 @@ $(document).on('input', '#update-username', function() {
 	if($('#update-username').val() == "") {
 		$('#user-update-submit').prop("disabled", true);
 		$('#user-validation').show();
+		$('user-update-submit').css('background','#D9E5FF');
 	} else {
 		$('#user-update-submit').prop("disabled", false);
 		$('#user-validation').hide();
+		$('user-update-submit').css('background','#4682B4');
 	};
 });
 /*

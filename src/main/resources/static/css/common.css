@@ -1,0 +1,120 @@
+body {
+	margin: 0;
+}
+
+.header {
+	display: flex;
+	height: 100px;
+	align-items: center;
+	background: black;
+	position:sticky;
+	top:0;
+}
+
+ .header h1 {
+	color: white;
+	padding-left: 40px;
+}
+
+.header-nav {
+	margin-left: auto;
+	padding-right: 40px;
+}
+
+.header-list {
+	list-style-type: none;
+	display: flex;
+}
+
+.header-item button {
+/* 	margin-left: 20px; */
+	background: #eee;
+    border-radius: 3px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 220px;
+    padding: 10px 25px;
+    color: #313131;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+
+.header-item  button:before {
+    position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+.header-item button:hover {
+    background: #313131;
+    color: #FFF;
+}
+
+.header-item input {
+	background: #3CB371;
+    border-radius: 3px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 220px;
+    padding: 10px 25px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+
+.header-item  input:before {
+    position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+.header-item input:hover {
+    background: #FFF;
+    color: black;
+}
+
+.header-item button {
+	background: #4682B4;
+    border-radius: 3px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px 0 auto;
+    max-width: 220px;
+    padding: 10px 25px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+
+.header-item  button:before {
+    position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+.header-item button:hover {
+    background: #FFF;
+    color: black;
+}
+
+.footer {
+	height: 100px;
+	line-height:60px;
+	width: 100%;
+	text-align: center;
+	background: black;
+	position: absolute;
+    bottom: 0;
+    color: white;
+}

@@ -2,25 +2,32 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="/css/signup.css">
 <title>Insert title here</title>
 </head>
 <body>
 	
-	<!-- 新規ユーザ登録フォーム。最終的に消す -->
-	<!-- password→aaaaa -->
-	<div>
+	<div class="top-text">
+		<h1 class="heading">新規ユーザー登録</h1>
+	</div>
+	<div class="signup-error">
 		<ul th:if="${validationError}" th:each="error : ${validationError}">
 			<li th:text="${error}"></li>
 		</ul>
 	</div>
-	<div>
+	<div class="signup-form-wrapper">
 		<form method="post" th:action="@{/user/create}" th:object="${user}">
 			<label>ユーザー名</label>
-			<input type="text" name="username">
-			<input type="text" name="password">
+			<input type="text" name="username"><br>
+			<label>パスワード</label>
+			<input type="text" name="password"><br>
 			<input type="hidden" name="role" value="USER">
-			<input type="submit" value="新規登録">
+			<div class="signup-submit">
+				<input type="submit" value="新規登録">
+			</div>
 		</form>
+	</div>
+	<div class="backbutton">
 		<form method="get" th:action="@{/login}">
 			<input type="submit" value="戻る">
 		</form>

@@ -1,0 +1,78 @@
+.top-text h1{
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.login-form-wrapper {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.login-submit {
+	margin: 20px 0 20px 0;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.user-regist-button {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.login-submit button {
+	background: #4682B4;
+    border-radius: 3px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 220px;
+    padding: 7px 30px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+
+.login-submit  button:before {
+    position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+.login-submit button:hover {
+    background: #FFF;
+    color: black;
+}
+
+
+.user-regist-button input {
+	background: #F0E68C;
+    border-radius: 3px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 220px;
+    padding: 6px 6px;
+    color: black;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+
+.user-regist-button input:before {
+    position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+.user-regist-button input:hover {
+    background: #FFF;
+    color: black;
+}
+
