@@ -8,8 +8,9 @@ public class TaskForm {
 	
 	private int user_id;
 	
+//	@NotBlank(message = "タイトルを入力してください")
 	private String title;
-	
+//	@NotBlank(message = "タスクを入力してください")
 	private String task;
 	
 	private Timestamp createdDate;

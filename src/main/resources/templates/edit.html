@@ -7,6 +7,11 @@
 <body>
 	<h1 th:text="${loginUser.username} + の更新"></h1>
 	<div>
+		<ul th:if="${validationError}" th:each="error : ${validationError}">
+			<li th:text="${error}"></li>
+		</ul>
+	</div>
+	<div>
 		<form method="post" th:action="@{/user/update}" th:object="${loginUser}">
 			<label>ユーザー名</label>
 			<input type="text" name="username" th:value="${loginUser.username}">

@@ -31,11 +31,17 @@ $(document).on('click', '#update-submit', function() {
 	let $formData = $('#modal-form');
 	//フォームに入力した値を配列で格納する
 	let param = $formData.serializeArray();
-	//$.post()で取得した値をコントローラーに渡す
-	$.post('/update', param).done(function() {
-		$('#update-modal').fadeOut();
-		$('#task_index').load(' #task_index');
-	});
+	
+	if(param[0].value == "" || param[1].value == "") {
+		alert("タイトルと内容の入力は必須です");
+		return;
+	} else {
+		//$.post()で取得した値をコントローラーに渡す
+		$.post('/update', param).done(function() {
+			$('#update-modal').fadeOut();
+			$('#task_index').load(' #task_index');
+		});
+	}
 });
 
 

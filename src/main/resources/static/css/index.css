@@ -1,3 +1,69 @@
+.top-text h1{
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}
+
+.new-task-form {
+	display: flex;
+	align-items: center;
+	margin-bottom: 80px;
+}
+
+#task_form {
+	margin: 0 auto;
+}
+
+.new-task-label {
+	margin-left: 20px;
+}
+
+#sub_button {
+	background: #4682B4;
+    border-radius: 3px;
+    position: relative;
+    align-items: center;
+    margin: 0 20px 0 20px;
+    max-width: 220px;
+    padding: 10px 25px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+#task_form input:before {
+    position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+#task_form input:hover {
+    background: #FFF;
+    color: black;
+}
+
+#task_index {
+	width: 80%;
+	margin: 0 auto;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	width: 60%;
+	margin: 0 auto;
+}
+
+table tr{
+  border-bottom: solid 1px #eee;
+  cursor: pointer;
+}
+
+table th,table td{
+  text-align: center;
+  width: 25%;
+  padding: 15px 0;
+}
+
 #update-modal {
 	display: none;
 	height: 100vh;
@@ -21,6 +87,7 @@
     top: 50%;
     transform: translate(-50%,-50%);
     width: 60%;
+    text-align: center;
 }
 
 #user-update-modal {
@@ -46,4 +113,156 @@
     top: 50%;
     transform: translate(-50%,-50%);
     width: 60%;
+     text-align: center;
+}
+
+#user-validation ul {
+	list-style-type: none;
+	color: red;
+}
+
+#update-submit {
+	background: #4682B4;
+    border-radius: 3px;
+    position: relative;
+    align-items: center;
+    margin: 0 20px 0 20px;
+    max-width: 220px;
+    padding: 5px 15px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+#modal-form input:before {
+	position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+
+#modal_form input:hover {
+    background: #FFF;
+    color: black;
+}
+
+#back-button {
+	background: #C0C0C0;
+    border-radius: 3px;
+    position: relative;
+    align-items: center;
+    max-width: 220px;
+    padding: 5px 15px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+#modal-form button:before{
+	position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+
+#modal_form button:hover {
+    background: #FFF;
+    color: black;
+}
+
+#user-update-submit {
+	background: #4682B4;
+    border-radius: 3px;
+    position: relative;
+    align-items: center;
+    margin: 0 20px 0 20px;
+    max-width: 220px;
+    padding: 5px 15px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+#user-modal-form input:before {
+	position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+
+#user-modal_form input:hover {
+    background: #FFF;
+    color: black;
+}
+
+#user-back-button {
+	background: #C0C0C0;
+    border-radius: 3px;
+    position: relative;
+    align-items: center;
+    max-width: 220px;
+    padding: 5px 15px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+#user-modal-form button:before{
+	position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+
+#user-modal_form button:hover {
+    background: #FFF;
+    color: black;
+}
+
+#update_task button {
+	background: #3CB371;
+    border-radius: 3px;
+    position: relative;
+    align-items: center;
+    max-width: 220px;
+    padding: 5px 15px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+#update_task button:before{
+	position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+
+#update_task button:hover {
+    background: #FFF;
+    color: black;
+}
+
+#delete-task input {
+	background: #FF5F17;
+    border-radius: 3px;
+    position: relative;
+    align-items: center;
+    max-width: 220px;
+    padding: 5px 15px;
+    color: white;
+    transition: 0.3s ease-in-out;
+    font-weight: 500;
+}
+
+#delete-task input:before{
+	position: relative;
+    font-weight: 900;
+    margin-right: 8px;
+    color: #999;
+}
+
+#delete-task input:hover {
+    background: #FFF;
+    color: black;
 }

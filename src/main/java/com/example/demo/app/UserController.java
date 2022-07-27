@@ -1,5 +1,8 @@
 package com.example.demo.app;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
@@ -8,6 +11,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,7 +38,15 @@ public class UserController {
 	}
 	
 	@PostMapping("create")
-	public String create(@ModelAttribute User user, Model model) {
+	public String create(@ModelAttribute @Validated User user, BindingResult result, Model model) {
+		if(result.hasErrors()) {
+			List<String> errorList = new ArrayList<String>();
+			for (ObjectError error : result.getAllErrors()) {
+				errorList.add(error.getDefaultMessage());
+	        }
+	        model.addAttribute("validationError", errorList);
+	        return "signup";
+		}
 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodePassword = passwordEncoder.encode(user.getPassword());
 		user.setPassword(encodePassword);
@@ -51,9 +65,16 @@ public class UserController {
 	
 	@PostMapping("update")
 	//@ResponseBody
-	public String update(Model model, @ModelAttribute User loginUser) {
-		System.out.println(loginUser.getUsername());
-		System.out.println(loginUser.getPassword());
+	public String update(@ModelAttribute User loginUser, Model model) {
+//		if(result.hasErrors()) {
+//			List<String> errorList = new ArrayList<String>();
+//			for (ObjectError error : result.getAllErrors()) {
+//				errorList.add(error.getDefaultMessage());
+//	        }
+//	        model.addAttribute("validationError", errorList);
+//	        return "redirect:/user/edit";
+//		}
+		
 		if(loginUser.getPassword() != "" ) {
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 			String encodePassword = passwordEncoder.encode(loginUser.getPassword());
