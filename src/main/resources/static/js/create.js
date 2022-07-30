@@ -20,22 +20,4 @@ $(document).on("click", '#sub_button', function(e) {
 	}
 });
 
-//バリデーションの設定
-
-/*
-	$('#task_form').validate({
-		rules: {
-			title: {
-				required: true,
-			},
-		},
-		messages: {
-			title: {
-				required: "タイトルを入力してください",
-			},
-		},
-	});
-*/
-
-
 	

@@ -1,3 +1,11 @@
+.container {
+	position: relative;
+      padding-bottom: 60px;
+      box-sizing: border-box;
+      min-height: 100vh;
+}
+
+
 .top-text h1{
 	align-items: center;
 	display: flex;
@@ -45,6 +53,8 @@
 #task_index {
 	width: 80%;
 	margin: 0 auto;
+	height: 500px;
+	overflow: auto;
 }
 table {
 	border-collapse: collapse;

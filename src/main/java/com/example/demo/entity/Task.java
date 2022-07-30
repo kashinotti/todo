@@ -21,11 +21,9 @@ public class Task {
 	private int user_id;
 	
 	@Column
-//	@NotBlank(message = "タイトルを入力してください")
 	private String title;
 	
 	@Column
-//	@NotBlank(message = "タスクを入力してください")
 	private String task;
 	
 	@Column(updatable = false)
