@@ -12,4 +12,19 @@ public class LoginController {
 	public String login() {
 		return "login";
 	}
+	
+//	@PostMapping
+//	public String login(@ModelAttribute("username") String username, 
+//			@RequestAttribute(name = WebAttributes.AUTHENTICATION_EXCEPTION, required = false) Exception exception, 
+//			Model model) {
+//		
+//		model.addAttribute("message", username);
+//		System.out.println(username);
+//		
+//		if (exception != null) {
+//		      model.addAttribute("message", exception.getMessage());
+//		}
+//		
+//		return "login";
+//	}
 }
