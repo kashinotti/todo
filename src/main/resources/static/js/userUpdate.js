@@ -33,40 +33,10 @@ $(document).on('input', '#update-username', function() {
 	if($('#update-username').val() == "") {
 		$('#user-update-submit').prop("disabled", true);
 		$('#user-validation').show();
-		$('user-update-submit').css('background','#D9E5FF');
+		$('#user-update-submit').css('background','#D9E5FF');
 	} else {
 		$('#user-update-submit').prop("disabled", false);
 		$('#user-validation').hide();
-		$('user-update-submit').css('background','#4682B4');
+		$('#user-update-submit').css('background','#4682B4');
 	};
 });
-/*
-let preventDefault = true;
-$(document).on('click', '#user-update-submit', function(e) {
-	if(preventDefault) {
-		e.preventDefault();
-		let $formData = $('#user-model-form');
-		let param = $formData.serializeArray();
-		if(param[0].value == "") {
-			alert("タイトルと内容の入力は必須です");
-			return;
-		} else {
-			preventDefault = false;
-			$(this).trigger('click');
-		};
-	}
-});
-*/
-
-/*
-$(document).on('click', '#user-update-submit', function(e) {
-	e.preventDefault();
-	let $formData = $('#user-model-form');
-	let param = $formData.serializeArray();
-	console.log(param);
-	$.post('/user/update', param).done(function() {
-		$('#/user-update-modal').fadeout();
-		$('#loginInfo').load(' #loginInfo');
-	});
-});
-*/

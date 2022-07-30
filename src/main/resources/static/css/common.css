@@ -1,5 +1,6 @@
 body {
 	margin: 0;
+	z-index: 1;
 }
 
 .header {
@@ -9,6 +10,7 @@ body {
 	background: black;
 	position:sticky;
 	top:0;
+	z-index: 2;
 }
 
  .header h1 {
@@ -106,6 +108,10 @@ body {
 .header-item button:hover {
     background: #FFF;
     color: black;
+}
+
+footer {
+	margin-top: 100px;
 }
 
 .footer {

@@ -40,16 +40,12 @@ public class TaskController {
 		//新規登録か更新か判断するためにセット(新規登録と判断)
 		taskForm.setNewTask(true);
 		//ログインユーザーの情報をセット
-//		String loginUserName = user.getUsername();
-//		int loginUserId = userDetailsService.getId(loginUserName);
 		User loginUser = userService.findByUsername(user.getUsername());
 		System.out.println(loginUser.getId());
 		//taskのリストを取得してモデルにセット
 		List<Task> tasks = taskService.findAllTask();
 		model.addAttribute("tasks", tasks);
 		model.addAttribute("loginUser", loginUser);
-//		model.addAttribute("loginUserName", loginUserName);
-//		model.addAttribute("loginUserId", loginUserId);
 		return "index";
 	}
 	
@@ -57,21 +53,9 @@ public class TaskController {
 	@ResponseBody
 	public void insert(@ModelAttribute TaskForm taskForm, Model model, @AuthenticationPrincipal UserDetails loginUser) {
 		
-//		if(result.hasErrors()) {
-//			List<String> errorList = new ArrayList<String>();
-//			for(ObjectError error : result.getAllErrors()) {
-//				errorList.add(error.getDefaultMessage());
-//			}
-//			
-//			model.addAttribute("errorMessages", errorList);
-//			return "index";
-//		}
-		
 		Task task = makeTask(taskForm, 0, loginUser.getUsername());
 		
 		taskService.insert(task);
-//		return "redirect:/task";
-		//return task;
 	}
 	
 	@PostMapping("/delete")

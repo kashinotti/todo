@@ -28,9 +28,6 @@ public class UserController {
 	
 	@Autowired
 	UserService userService;
-//	
-//	@Autowired
-//	private BCryptPasswordEncoder passwordEncoder;
 	
 	@GetMapping("signup")
 	public String signup() {
@@ -64,16 +61,7 @@ public class UserController {
 	}
 	
 	@PostMapping("update")
-	//@ResponseBody
 	public String update(@ModelAttribute User loginUser, Model model) {
-//		if(result.hasErrors()) {
-//			List<String> errorList = new ArrayList<String>();
-//			for (ObjectError error : result.getAllErrors()) {
-//				errorList.add(error.getDefaultMessage());
-//	        }
-//	        model.addAttribute("validationError", errorList);
-//	        return "redirect:/user/edit";
-//		}
 		
 		if(loginUser.getPassword() != "" ) {
 			BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();

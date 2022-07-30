@@ -16,21 +16,13 @@
 <title>ホーム画面</title>
 </head>
 <body>
-
+<div class="container">
 	<div th:replace="common :: header"></div>
 	<!-- SpringへのPathを用意する(非同期通信用) -->
 	<!-- <input type="hidden" id="ajax_url" th:value="@{/task/insert}"> -->
 	<input type="hidden" id="loginUser-info1" th:value="${loginUser.username}">
 	<input type="hidden" id="loginUser-info2" th:value="${loginUser.id}">
 	
-	<!-- <p id="loginInfo" th:text="${loginUser.username} + でログインしています。"></p> -->
-	<!-- <div> -->
-	<!-- 	<button id="update-user">ユーザー情報変更</button> -->
-		<!-- <form method="get" th:action="@{/user/edit}">
-			<input type="hidden" name="username" th:value="${loginUser.username}">
-			<input type="submit" value="登録情報変更">
-		</form> -->
-	<!-- </div> -->
 	<div class="top-text">
 		<h1 th:text="${loginUser.username} + のタスク"></h1>
 	</div>
@@ -125,5 +117,6 @@
 	</form> -->
 	
 	<div th:replace="common :: footer"></div>
+</div>
 </body>
 </html>
